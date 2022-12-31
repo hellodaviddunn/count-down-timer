@@ -1,0 +1,36 @@
+// Set the number of years
+const numYears = 2;
+
+// Calculate the number of days from the number of years
+const numDays = numYears * 365;
+
+// Set the current date
+const currentDate = new Date();
+
+// Set the target date as the current date plus the number of days
+const targetDate = new Date(currentDate.getTime() + (numDays * 24 * 60 * 60 * 1000));
+
+// Update the countdown every 1 second
+setInterval(function() {
+  // Get today's date and time
+  const now = new Date().getTime();
+
+  // Find the distance between now and the target date
+  const distance = targetDate - now;
+
+  // Time calculations for days, hours, minutes, and seconds
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Output the result in an element with id="countdown"
+  document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the countdown is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "EXPIRED";
+  }
+}, 1000);
